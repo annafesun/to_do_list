@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TodoActions } from '../../store/reducers/todo/slice'
-import { Button, Card, Col, Input, Row } from 'antd'
+import { Button, Col, Input, Row } from 'antd'
 //styles
 import styles from './index.module.css'
+//localstorage
 import { getTodoSelector } from '../../store/reducers/todo/selectors'
 import { TODOS } from '../../constants/localStorage'
 import { LS } from '../../utilits/LocalStorage'
+import Todo from '../Todo'
 
 const CreatePost = ({}) => {
   const [todo, setTodo] = useState({
@@ -24,10 +26,6 @@ const CreatePost = ({}) => {
     }
   }
 
-  const removeTodo = (id) => {
-    dispatch(TodoActions.removeTodo(id))
-  }
-
   useEffect(() => {
     const LStodos = LS.get(TODOS)
     if (LStodos) {
@@ -37,60 +35,58 @@ const CreatePost = ({}) => {
 
   return (
       <div className={styles.createPost}>
-        <Row>
-          <Col span={9}>
-            <Input
-                onChange={(e) => setTodo((prev) => (
-                    { ...prev, title: e.target.value }
-                ))}
-                value={todo.title}
-                placeholder="Add title"
-            />
-          </Col>
-          <Col span={9}>
-            <Input
-                value={todo.description}
-                onChange={(e) => setTodo((prev) => (
-                    { ...prev, description: e.target.value }
-                ))}
-                placeholder="Add description"
-            />
-          </Col>
-          <Col span={6}>
-            <Button
-                block
-                shape="round"
-                type="primary"
-                danger
-                onClick={addTodo}
-            >
-              Create
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          {todos?.map(({ title, description, id }) => (
-              <Col
-                  key={id}
-                  span={24}
-              >
-                <Card
-                    className={styles.post}
-                    title={title}
-                    bordered={false}
-                >
-                  <p>{description}</p>
-                  <Button
-                      type="primary"
-                      danger
-                      onClick={() => removeTodo(id)}
-                  >
-                    Delete
-                  </Button>
-                </Card>
-              </Col>
-          ))}
-        </Row>
+       <Row gutter={[0, 24]}>
+         <Col span={24}>
+           <Row gutter={16}>
+             <Col span={8}>
+               <Input
+                   onChange={(e) => setTodo((prev) => (
+                       { ...prev, title: e.target.value }
+                   ))}
+                   value={todo.title}
+                   placeholder="Add title"
+               />
+             </Col>
+             <Col span={8}>
+               <Input
+                   value={todo.description}
+                   onChange={(e) => setTodo((prev) => (
+                       { ...prev, description: e.target.value }
+                   ))}
+                   placeholder="Add description"
+               />
+             </Col>
+             <Col span={8}>
+               <Button
+                   block
+                   shape="round"
+                   type="primary"
+                   danger
+                   onClick={addTodo}
+               >
+                 Create
+               </Button>
+             </Col>
+           </Row>
+         </Col>
+         <Col span={24}>
+           <Row gutter={[16, 20]}>
+             {todos?.map(({ title, description, id, tasks}) => (
+                 <Col
+                     key={id}
+                     span={8}
+                 >
+                   <Todo
+                       title={title}
+                       description={description}
+                       id={id}
+                       tasks={tasks}
+                   />
+                 </Col>
+             ))}
+           </Row>
+         </Col>
+       </Row>
       </div>
   )
 }

@@ -1,0 +1,7 @@
+.buttonAdd:not(:last-child){
+    margin-right: 10px;
+    background-color: #ff790e;
+    border: none;
+    box-shadow: 0 0 5px #f8c288;
+    color: white;
+}
