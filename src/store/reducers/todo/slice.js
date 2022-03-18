@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   todos: [{
     id: 1,
-    title: 'test1',
-    description: 'Test11',
+    title: '',
+    description: '',
     tasks: [
       {
         id: 1,
-        task: 'task 1',
-        priority: 'low'
+        task: '',
+        priority: ''
       }
     ]
   }]
