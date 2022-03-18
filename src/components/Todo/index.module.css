@@ -1,0 +1,63 @@
+.post {
+    background-color: #b4eaef;
+    height: 100%;
+}
+
+.post:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.task {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.taskText {
+    flex: 0 0 50%;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    padding: 0 15px 0 5px;
+    word-break: break-word;
+}
+
+.tooltip span {
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+    padding: 2px 3px;
+    transition: all .3s ease-in-out;
+    width: max-content;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip:hover span {
+    opacity: 1;
+    visibility: visible;
+    display: inline;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    color: #6c6c6c;
+    font-size: 10px;
+}
+
+.priorityText {
+    flex: 0 0 30%;
+    margin-right: 20px;
+}
+
+.linkIco {
+    flex: 0 0 20%;
+}
+
+.minusIco {
+    width: 20px;
+    height: 30px;
+}
+
